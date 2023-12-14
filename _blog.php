@@ -1,7 +1,8 @@
-<?php 
+<?php
 $header_min = true;
 $loadAI = false;
 $use_bootstrap_icons = true;
+
 require_once("inc/includes.php");
 define('META_TITLE', @$seoConfig['blog_meta_title']);
 define('META_DESCRIPTION', @$seoConfig['blog_meta_description']);
@@ -15,12 +16,13 @@ $totalPosts = $posts->getTotalPosts();
 $totalPages = ceil($totalPosts / $postsPerPage);
 ?>
 
+
 <section id="inner-page">
   <div class="container">
     <div class="row">
       <div class="col"><h1><?php echo $getMenuName->name; ?></h1></div>
     </div>
-  </div>  
+  </div>
 </section>
 
 <section class="py-4">
@@ -31,7 +33,7 @@ $totalPages = ceil($totalPosts / $postsPerPage);
         <h2 class="default-title"><?php echo $lang['blog_title']; ?></h2>
         <p><?php echo $lang['blog_sub_title']; ?></p>
       </div>
-    </div>    
+    </div>
 
     <div class="row">
       <?php foreach ($getPost as $showPosts) {?>
@@ -57,7 +59,7 @@ $totalPages = ceil($totalPosts / $postsPerPage);
                 </div>
                 <div class="card-post-cta text-end">
                   <a href="<?php echo $base_url; ?>/blog/<?php echo $showPosts->slug;?>"><span class="btn btn-primary"><?php echo $lang['blog_read_more']; ?></span></a>
-                </div>              
+                </div>
               </div>
             </div>
           </div>
@@ -78,7 +80,7 @@ $totalPages = ceil($totalPosts / $postsPerPage);
                         <?php endfor; ?>
                     </ul>
                 </nav>
-            </div>        
+            </div>
         </div>
     </div>
     <?php } ?>
