@@ -32,7 +32,6 @@ $settings = new Settings();
 $tags = new Tags();
 $theme = new Theme();
 
-
 // Get configuration settings
 $config = $settings->get(1);
 if (isset($config) && is_object($config)) {

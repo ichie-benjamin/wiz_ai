@@ -34,11 +34,11 @@ require_once(__DIR__."/../../helpers/message-session.php");
             <div class="modal-header">
               <h5 class="modal-title" id="modalCopyCodeLabel">Copy embed code</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-            </div>      
+            </div>
             <div class="modal-body">
 
             <div id="modal-copy-code-body">
-              
+
             </div>
 
             <div class="alert alert-warning mb-1">
@@ -55,7 +55,7 @@ require_once(__DIR__."/../../helpers/message-session.php");
                 </ul>
               </ul>
             </div>
-              
+
             </div>
             <div class="modal-footer">
               <button class="btn btn-primary" onclick="copyContent('modal-copy-code-body')"><i class="bi bi-clipboard"></i> Copy code</button>
@@ -79,12 +79,15 @@ require_once(__DIR__."/../../helpers/message-session.php");
               <th scope="col">Status</th>
               <th scope="col">Model</th>
               <th scope="col">Embed chat</th>
+              <th scope="col">DALL-E</th>
+              <th scope="col">Whisper</th>
+              <th scope="col">Vision</th>
               <th scope="col">Package</th>
               <th scope="col" class="text-end">Action</th>
             </tr>
           </thead>
           <tbody id="sortableTableBody" data-module="<?php echo $module_name; ?>">
-            <?php 
+            <?php
             foreach ($get as $show) {
             $getPromptPackage = $prompts_credits_packs->getListByIdPrompt($show->id)->FetchAll();
             $show = array_map(function ($value) {
@@ -103,7 +106,7 @@ require_once(__DIR__."/../../helpers/message-session.php");
                 <div class="form-check form-switch form-switch-lg">
                   <input class="form-check-input" type="checkbox" role="switch" id="statusSwitch-<?php echo $show->id; ?>" <?php echo ($show->status == 1) ? 'checked' : ''; ?>>
                 </div>
-              </td>              
+              </td>
               <td><?php echo $show->API_MODEL; ?></td>
               <td>
                 <?php if ($show->allow_embed_chat) { ?>
@@ -111,9 +114,9 @@ require_once(__DIR__."/../../helpers/message-session.php");
                 <?php } else { ?>
                   No
                 <?php } ?>
-              </td>        
+              </td>
               <td>
-              <?php 
+              <?php
               if($getPromptPackage){
                 foreach ($getPromptPackage as $showPromptPackage) {
                   $getCreditPack = $credits_packs->get($showPromptPackage->id_credits_pack);
@@ -126,8 +129,8 @@ require_once(__DIR__."/../../helpers/message-session.php");
               }else{
                 echo "free";
               }
-              ?>                
-              </td>        
+              ?>
+              </td>
               <td class="text-end">
                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-module="<?php echo $module_name; ?>"  data-id="<?php echo $show->id; ?>"><i class="bi bi-trash-fill fs-6"></i></button>
                 <a href="<?php echo $base_url."/admin/".$module_name."/edit/".$show->id; ?>" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square fs-6"></i></a>
@@ -137,7 +140,7 @@ require_once(__DIR__."/../../helpers/message-session.php");
           </tbody>
         </table>
 
-      </div>    
+      </div>
 
 <?php
 require_once("../../inc/footer.php");

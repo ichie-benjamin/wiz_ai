@@ -1,11 +1,5 @@
 <?php
 $use_bootstrap_icons = true;
-
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-
 // Include necessary files
 require_once(__DIR__ . '/inc/includes.php');
 define('META_TITLE', $seoConfig['home_meta_title']);

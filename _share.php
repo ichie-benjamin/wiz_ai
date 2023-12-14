@@ -40,7 +40,7 @@ require_once("modules/customer/chat-session.php");
                                 <a href="<?php echo $base_url."/download-chat/".$getPrompt->slug."/".$lastThread->id_thread."?format=pdf&share=true"; ?>">
                                   <div class="chat-action-buttons">
                                      <i class="bi bi-filetype-pdf"></i>
-                                  </div>                            
+                                  </div>
                                 </a>
                             </div>
 
@@ -48,7 +48,7 @@ require_once("modules/customer/chat-session.php");
                                 <a href="<?php echo $base_url."/download-chat/".$getPrompt->slug."/".$lastThread->id_thread."?format=docx&share=true"; ?>">
                                   <div class="chat-action-buttons">
                                      <i class="bi bi-filetype-docx"></i>
-                                  </div>                            
+                                  </div>
                                 </a>
                             </div>
 
@@ -56,21 +56,28 @@ require_once("modules/customer/chat-session.php");
                                 <a href="<?php echo $base_url."/download-chat/".$getPrompt->slug."/".$lastThread->id_thread."?format=txt&share=true"; ?>">
                                   <div class="chat-action-buttons">
                                      <i class="bi bi-filetype-txt"></i>
-                                  </div>                            
+                                  </div>
                                 </a>
-                            </div>                            
+                            </div>
                         </div>
 
                     </div>
 
                     <div class="share-chat-thread">
-                        <?php 
+                        <?php
                         foreach ($getByThread as $showByThread) {
+                         $vision_img = "";
+                         if($showByThread->vision_img){
+                            $vision_img = $showByThread->vision_img;
+                         }
                          if($showByThread->role != "system"){
                          $isImageBlock = false;
 
+                         if($showByThread->dall_e_array){
                          $json_array = json_decode($showByThread->dall_e_array, true);
-                         if (json_last_error() === JSON_ERROR_NONE && isset($json_array['data'])) {
+                         }
+
+                         if ($showByThread->dall_e_array && json_last_error() === JSON_ERROR_NONE && isset($json_array['data'])) {
                              $content = '<p><strong class="ia-image-prompt-label">'.$showByThread->content.'</strong></p><div class="wrapper-image-ia image_ia_' . time() . '">';
                              foreach ($json_array['data'] as $item) {
                                  if (isset($item['url'])) {
@@ -93,36 +100,36 @@ require_once("modules/customer/chat-session.php");
                                             <div class="wrapper-chat-header">
                                                 <div class="user-name"><h5><?php echo $showByThread->role == 'assistant' ? $getPrompt->name : $lang['you']; ?></h5></div>
                                                 <div class="chat-actions">
-                                                    <?php if (!$isImageBlock) { ?>  
+                                                    <?php if (!$isImageBlock) { ?>
                                                         <?php if ($getPrompt->use_google_voice) { ?>
                                                             <div class="chat-audio"><img data-play="false" src="<?php echo $base_url;?>/img/btn_tts_play.svg"></div>
-                                                        <?php } ?>     
-                                                        <?php if($getPrompt->display_copy_btn){?>                                           
+                                                        <?php } ?>
+                                                        <?php if($getPrompt->display_copy_btn){?>
                                                         <span onclick="copyText(this)" class="copy-text" title="<?php echo $lang['copy_text1']; ?>"><i class="bi bi-clipboard"></i></span>
                                                         <?php } ?>
-                                                    <?php } ?>                                            
+                                                    <?php } ?>
                                                 </div><!--chat-actions-->
                                             </div>
-                                            <div class="message-text"><div class="chat-response"><?php echo $content; ?></div></div>
+                                            <div class="message-text"><div class="chat-response"><?php  if($vision_img) echo "<img class='thumbnail-vision-img' src='/public_uploads/vision/".$vision_img."'>"; ?><?php echo $isImageBlock ? $content : removeCustomInput(stripslashes($content)); ?></div></div>
                                             <div class="date-chat"><img src="<?php echo $base_url;?>/img/icon-clock.svg"> <?php echo $showByThread->created_at; ?></div>
                                         </div>
                                     </div>
                                 </div>
                         <?php } ?>
-                        <?php } ?>                        
+                        <?php } ?>
                     </div>
 
                 </div>
             </div>
         </div>
     </div>
-</section>  
+</section>
 
-<?php 
+<?php
 require_once("inc/footer.php");
 ?>
 
 
-<?php 
+<?php
 require_once("inc/footer.php");
 ?>

@@ -191,14 +191,14 @@ if (isset($_SESSION['action']) && !empty($_SESSION['action'])) {
 
         <?php if($AI->display_contacts_user_list && !$embed_chat){?>
         <div class="col-lg-3 col-md-3 col-sm12 p-0 col-contacts-border" style="display:none;">
-         
+
          <div class="ai-contacts-top">
            <strong><?php echo $lang['chat_call_action1']; ?></strong>
            <span><?php echo $lang['chat_call_action2']; ?></span>
          </div>
 
          <div class="ai-contacts-scroll">
-            <?php 
+            <?php
             $itemCount = 0;
             $getListAI = reorderArrayById($getListAI, $AI->id);
             foreach ($getListAI as $showListAI) {?>
@@ -232,7 +232,7 @@ if (isset($_SESSION['action']) && !empty($_SESSION['action'])) {
                     <?php if($AI->display_API_MODEL){?>
                     <span class="badge bg-success badge-categories"><?php echo $AI->API_MODEL; ?></span>
                     <?php } ?>
-                    <?php 
+                    <?php
                     if(!$embed_chat){
                         foreach ($getCategories as $showCategories) {
                           $categoriesName = $categories->get($showCategories->id_category);
@@ -240,7 +240,7 @@ if (isset($_SESSION['action']) && !empty($_SESSION['action'])) {
                         }
                     }
                     ?>
-                    </div>                  
+                    </div>
                 </div>
               </div>
             </div>
@@ -248,7 +248,7 @@ if (isset($_SESSION['action']) && !empty($_SESSION['action'])) {
             <div class="col-md-5 col-lg-4 col-2">
 
             <div class="icons-options">
-               
+
                 <div class="dropdown-center">
 
                 <?php if($AI->display_share){?>
@@ -262,13 +262,13 @@ if (isset($_SESSION['action']) && !empty($_SESSION['action'])) {
                     <i class="bi bi-lightbulb" alt="<?php echo $lang['btn_suggestions']; ?>" title="<?php echo $lang['btn_suggestions']; ?>"></i>
                   </div>
                   <?php } ?>
-                  
+
                   <?php if($AI->display_contacts_user_list && !$embed_chat){?>
                   <div class="chat-action-buttons toggle_employees_list">
                      <i class="bi bi-person-lines-fill" alt="<?php echo $lang['btn_employees_list']; ?>" title="<?php echo $lang['btn_employees_list']; ?>"></i>
                   </div>
                   <?php } ?>
-                  
+
                   <?php if($AI->display_description){?>
                   <div class="chat-action-buttons chat-btn-about" data-bs-toggle="modal" data-bs-target="#modalDefault">
                     <i class="bi bi-info-circle" alt="<?php echo $lang['btn_about']; ?>" title="<?php echo $lang['btn_about']; ?>"></i>
@@ -281,10 +281,10 @@ if (isset($_SESSION['action']) && !empty($_SESSION['action'])) {
                       <ul class="dropdown-menu dropdown-item-chat" aria-labelledby="dropdownMenuButton">
                         <li id="new-chat"><a class="dropdown-item" href="<?php echo $base_url; ?>/new-chat/<?php echo $AI->slug . ($embed_chat == 1 ? '?embed=true' : ''); ?>"><span><i class="bi bi-plus-circle"></i> <?php echo $lang['button_new_chat']; ?></span></a></li>
                         <?php if(!$embed_chat){?>
-                        <li id="close-chat" class="d-block d-lg-none"><a class="dropdown-item" href="<?php echo $base_url;?>/ai-team"><i class="bi bi-x-lg"></i><?php echo $lang['button_close']; ?></span></a></li> 
+                        <li id="close-chat" class="d-block d-lg-none"><a class="dropdown-item" href="<?php echo $base_url;?>/ai-team"><i class="bi bi-x-lg"></i><?php echo $lang['button_close']; ?></span></a></li>
                         <?php } ?>
                         <li data-bs-toggle="modal" data-bs-target="#modalSuggestion" class="d-block d-lg-none"><a class="dropdown-item" href="#"><i class="bi bi-lightbulb"></i><?php echo $lang['btn_suggestions']; ?></span></a></li>
-                        <li data-bs-toggle="modal" data-bs-target="#modalDefault" class="d-block d-lg-none"><a class="dropdown-item" href="#"><i class="bi bi-file-person"></i><?php echo $lang['btn_about']." ".$AI->name; ?></span></a></li> 
+                        <li data-bs-toggle="modal" data-bs-target="#modalDefault" class="d-block d-lg-none"><a class="dropdown-item" href="#"><i class="bi bi-file-person"></i><?php echo $lang['btn_about']." ".$AI->name; ?></span></a></li>
                         <?php if(!$embed_chat){?>
                         <li class="d-block d-lg-none"><a class="dropdown-item" href="<?php echo $base_url;?>/ai-team"><i class="bi bi-people"></i><?php echo $lang['btn_employees_list'];?></span></a></li>
                         <li><a class="dropdown-item" href="<?php echo $base_url."/download-chat/".$AI->slug."/".@$_SESSION['threads'][$AI->id]; ?>?format=txt"><span><i class="bi bi-filetype-txt"></i> <?php echo $lang['button_download_chat']; ?></span></a></li>
@@ -294,13 +294,13 @@ if (isset($_SESSION['action']) && !empty($_SESSION['action'])) {
                       </ul>
 
                 </div>
-              
+
               </div>
             </div>
 
           </div>
          </div>
-        
+
 
 
 
@@ -308,7 +308,7 @@ if (isset($_SESSION['action']) && !empty($_SESSION['action'])) {
         <div class="wrapper-vip-message">
             <h3><?php echo $lang['vip_upgrade_message'];?></h3>
                 <div class="wrapper-vip-package-list">
-                    <?php 
+                    <?php
                     // Get all credit packs
                     $creditPackages = [];
                     if (!is_null($required_credit_pack)) {
@@ -316,7 +316,7 @@ if (isset($_SESSION['action']) && !empty($_SESSION['action'])) {
                             $creditPackages[] = $credits_packs->get($credit_pack_id['id_credits_pack']);
                         }
                     }
-                    
+
                     // Comparison function
                     function compare($a, $b) {
                         if ($a->amount == $b->amount) {
@@ -340,27 +340,28 @@ if (isset($_SESSION['action']) && !empty($_SESSION['action'])) {
                                 <h5><?php echo $getCreditPackInfo->price; ?></h5>
                             </div>
                         </div>
-                        <?php 
+                        <?php
                     }
                     ?>
                 </div>
             <div class="text-center mt-2">
                 <a href="/pricing" class="btn btn-primary"><?php echo $lang['vip_check_plans_btn']; ?></a>
-            </div>            
+            </div>
         </div>
-        <?php } ?>    
+        <?php } ?>
         <?php if(isset($vip) && !$vip){?>
         <div class="ia-chat-content">
           <div class="row">
             <div class="cell">
               <div class="chat-frame">
                 <?php
-                function displayMessage($role, $name, $content, $dall_e_array, $datetime, $image = null, $display_avatar = false, $use_google_voice = false, $extra_class = '') {
+                function displayMessage($role, $name, $content, $dall_e_array, $datetime, $image = null, $display_avatar = false, $use_google_voice = false, $extra_class = '', $vision_img = '') {
                     global $lang;
                     global $base_url;
                     global $AI;
-                    
+
                     $isImageBlock = false;
+
                     $json_array = json_decode($dall_e_array ?? '', true);
                     if (json_last_error() === JSON_ERROR_NONE && isset($json_array['data'])) {
                         $content = '<p><strong class="ia-image-prompt-label">'.$content.'</strong></p><div class="wrapper-image-ia image_ia_' . time() . '">';
@@ -385,17 +386,17 @@ if (isset($_SESSION['action']) && !empty($_SESSION['action'])) {
                                     <div class="wrapper-chat-header">
                                         <div class="user-name"><h5><?php echo $role == 'assistant' ? $name : $lang['you']; ?></h5></div>
                                         <div class="chat-actions">
-                                            <?php if (!$isImageBlock) { ?>  
+                                            <?php if (!$isImageBlock) { ?>
                                                 <?php if ($use_google_voice) { ?>
                                                     <div class="chat-audio"><img data-play="false" src="<?php echo $base_url;?>/img/btn_tts_play.svg"></div>
-                                                <?php } ?>     
-                                                <?php if($AI->display_copy_btn){?>                                           
+                                                <?php } ?>
+                                                <?php if($AI->display_copy_btn){?>
                                                 <span onclick="copyText(this)" class="copy-text" title="<?php echo $lang['copy_text1']; ?>"><i class="bi bi-clipboard"></i></span>
                                                 <?php } ?>
-                                            <?php } ?>                                            
+                                            <?php } ?>
                                         </div><!--chat-actions-->
                                     </div>
-                                    <div class="message-text"><div class="chat-response"><?php echo $isImageBlock ? $content : removeCustomInput(stripslashes($content)); ?></div></div>
+                                    <div class="message-text"><div class="chat-response"><?php  if($vision_img) echo "<img class='thumbnail-vision-img' src='/public_uploads/vision/".$vision_img."'>"; ?><?php echo $isImageBlock ? $content : removeCustomInput(stripslashes($content)); ?></div></div>
                                     <div class="date-chat"><img src="<?php echo $base_url;?>/img/icon-clock.svg"> <?php echo $datetime; ?></div>
                                 </div>
                             </div>
@@ -409,7 +410,7 @@ if (isset($_SESSION['action']) && !empty($_SESSION['action'])) {
                   <div id="overflow-chat">
 
                       <?php if (empty($_SESSION['history'][$AI_ID])) : ?>
-                          <?php displayMessage('assistant', $AI->name, stripslashes($AI->display_welcome_message) ? stripslashes($AI->welcome_message) : null, null, date("d/m/Y, H:i:s"), $AI->image, $AI->display_avatar, $AI->use_google_voice, null); ?>
+                          <?php displayMessage('assistant', $AI->name, stripslashes($AI->display_welcome_message) ? stripslashes($AI->welcome_message) : null, null, date("d/m/Y, H:i:s"), $AI->image, $AI->display_avatar, $AI->use_google_voice, null, null); ?>
                       <?php else : ?>
 
                       <?php
@@ -419,22 +420,22 @@ if (isset($_SESSION['action']) && !empty($_SESSION['action'])) {
                               @$name = $message['role'] == 'assistant' ? $message['name'] : $lang['you'];
                               @$content = $message['role'] == 'assistant' ? $message['content'] : $message['content'];
                               @$extra_class = $counter > 1 ? 'conversation-thread-flow' : '';
-                              displayMessage($message['role'], $AI->name, $message['content'], $message['dall_e_array'], $message['datetime'], $AI->image, $AI->display_avatar, $AI->use_google_voice, $extra_class);
+                              displayMessage($message['role'], $AI->name, $message['content'], $message['dall_e_array'], $message['datetime'], $AI->image, $AI->display_avatar, $AI->use_google_voice, $extra_class, $message['vision_img']);
                             }
                             $counter++;
-                          
+
                           endforeach;
                       ?>
 
                       <?php endif; ?>
 
                   </div>
-              </div>          
+              </div>
               <?php } ?>
               <?php if(isset($vip) && !$vip){?>
 
               <?php if ($embed_chat || ($isLogged || $_SESSION['message_count'] <= $config->free_number_chats)){ ?>
-                
+
                 <?php if(isset($userCredits)): ?>
                   <?php if(!$config->free_mode){?>
                   <span class="my-credits my-credits-mobile" style="display:none">
@@ -442,13 +443,13 @@ if (isset($_SESSION['action']) && !empty($_SESSION['action'])) {
                   </span>
                   <?php } ?>
                 <?php endif; ?>
-        
+
               <div class="message-area-bottom">
                 <canvas id="audioVisualizer" width="640" height="100"></canvas>
 
                 <!--start-widget--options--input-->
                 <div class="col col-options-input">
-                
+
                 <?php if($AI->display_prompts_output || $AI->show_prompts_tone || $AI->display_prompts_writing) {?>
                 <div class="btn-options-input"><div class="arrow-up"></div></div>
                 <?php } ?>
@@ -460,7 +461,7 @@ if (isset($_SESSION['action']) && !empty($_SESSION['action'])) {
                         <?php foreach ($getPromptsOutput as $show_prompts_output) {?>
                         <option <?php if($AI->id_prompts_output_default == $show_prompts_output->id) echo "selected"; ?> value="<?php echo $show_prompts_output->value; ?>"><?php echo $show_prompts_output->name; ?></option>
                         <?php } ?>
-                      </select> 
+                      </select>
                       <label for="selectLanguage"><?php echo $lang['label_display_chat_language_output']; ?></label>
                     </div>
                   </div>
@@ -471,7 +472,7 @@ if (isset($_SESSION['action']) && !empty($_SESSION['action'])) {
                         <option value=""><?php echo $lang['label_default']; ?></option>
                         <?php foreach ($getPromptsTone as $show_prompts_tone) {?>
                         <option <?php if($AI->id_prompts_tone_default == $show_prompts_tone->id) echo "selected"; ?> value="<?php echo $show_prompts_tone->value; ?>"><?php echo $show_prompts_tone->name; ?></option>
-                        <?php } ?>                      
+                        <?php } ?>
                         </select>
                         <label for="selectTone"><?php echo $lang['label_display_chat_tone']; ?></label>
                     </div>
@@ -483,16 +484,16 @@ if (isset($_SESSION['action']) && !empty($_SESSION['action'])) {
                         <option value=""><?php echo $lang['label_default']; ?></option>
                         <?php foreach ($getPromptsWriting as $show_prompts_writing) {?>
                         <option <?php if($AI->id_prompts_writing_default == $show_prompts_writing->id) echo "selected"; ?> value="<?php echo $show_prompts_writing->value; ?>"><?php echo $show_prompts_writing->name; ?></option>
-                        <?php } ?>                      
+                        <?php } ?>
                       </select>
                       <label for="selectWritingStyle"><?php echo $lang['label_display_chat_writing_style']; ?></label>
                     </div>
                   </div>
 
-                </div>                
+                </div>
                 <!--end-widget--options--input-->
                 <?php } ?>
-              
+
 
               <div class="chat-input">
 
@@ -500,7 +501,7 @@ if (isset($_SESSION['action']) && !empty($_SESSION['action'])) {
                   <span class="visually-hidden">Loading...</span>
                 </div>
 
-                <?php 
+                <?php
                 if(!$isLogged && $_SESSION['message_count'] > $config->free_number_chats && !$embed_chat){?>
                   <div class="col-12 chat-alert-mobile">
                     <div class="alert alert-warning mb-0">
@@ -518,8 +519,23 @@ if (isset($_SESSION['action']) && !empty($_SESSION['action'])) {
                   <div><b class='wait'><?php echo $lang['wait']; ?></b> <span></span>  <b class='is_typing'><?php echo $lang['is_typing']; ?></b></div>
                 </span>
 
-              
+
                 <textarea name="chat" id="chat" placeholder="<?php echo $lang['input_placeholder']; ?>" minlength="<?php echo $AI->chat_minlength; ?>" maxlength="<?php echo $AI->chat_maxlength; ?>"></textarea>
+
+                <?php if($AI->use_vision){?>
+                <div class="image-upload-wrapper">
+
+                    <div class="spinner-border spinner-vision" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+
+                    <label for="image-upload" class="image-label">
+                        <i class="bi bi-card-image"></i>
+                    </label>
+                    <input type="file" id="image-upload" class="image-input" accept="image/*" style="display: none;"/>
+                </div>
+                <?php } ?>
+
                 <?php if($AI->display_mic && !$embed_chat){?>
                 <img src="<?php echo $base_url; ?>/img/mic-start.svg" id="microphone-button">
                 <?php } ?>
@@ -528,16 +544,16 @@ if (isset($_SESSION['action']) && !empty($_SESSION['action'])) {
                 <?php } ?>
               </div>
 
-              </div>    
-              <?php } //vip ?> 
+              </div>
+              <?php } //vip ?>
 
             </div>
-          </div>          
-        </div>         
+          </div>
+        </div>
 
         </div>
       </div>
-    </div> 
+    </div>
   </section>
 
   <style type="text/css">
@@ -546,6 +562,7 @@ if (isset($_SESSION['action']) && !empty($_SESSION['action'])) {
     }
   </style>
 
-<?php 
+
+<?php
 require_once("inc/footer.php");
 ?>

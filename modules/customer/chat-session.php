@@ -34,6 +34,7 @@ if ($isLogged && !@$share) {
                 'datetime' => $message->created_at,
                 'total_characters' => $message->total_characters,
                 'saved' => (bool)$message->saved,
+                'vision_img' => $message->vision_img,
             ];
         }
     }
@@ -83,6 +84,7 @@ if ($isLogged && !@$share) {
                 if (isset($message['total_characters'])) {
                     $_POST['total_characters'] = $message['total_characters'];
                 }
+                @$_POST['vision_img'] = @$message['vision_img'];
                 $messages = new Messages();
                 if ($messages->add()) {
                     $hasItem = true;
@@ -112,8 +114,8 @@ if ($isLogged && !@$share) {
 	      echo json_encode(array('success' => true, 'message' => 'Data successfully saved'));
 	    }else{
 	      echo json_encode(array('success' => true, 'message' => 'No new data to be updated'));
-	    }  	
-	}  
+	    }
+	}
 
 }else{
   if (isset($_SESSION["history"])) {
@@ -122,5 +124,5 @@ if ($isLogged && !@$share) {
 
 	if($isFetchRequest){
 		echo json_encode(array('success' => true, 'message' => 'No new data to be updated'));
-	}  
+	}
 }

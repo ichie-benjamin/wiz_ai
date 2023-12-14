@@ -5,7 +5,7 @@ let is_gpt_model = false;
 let langLoaded = false;
 let use_google_voice_cloud = false;
 let isSpinnerActive = false;
-let useWhisper = false; 
+let useWhisper = false;
 let currentAudioElement = null;
 let audio = null;
 
@@ -239,7 +239,7 @@ function makeHtml(str){
         return '<pre><code>' + escapedCodeBlock + '</code>' + copyButton + '</pre>';
     }).replace(/(\d+\.\s)/g, "<strong>$1</strong>").replace(/(^[A-Za-z\s]+:)/gm, "<strong>$1</strong>");
 
-    return str;    
+    return str;
 }
 
 
@@ -278,7 +278,7 @@ function copyCode(button) {
 function scrollChatBottom() {
     let objDiv = document.getElementById("overflow-chat");
 
-    // Detectar se a página está em um iframe
+
     let isInIframe = false;
     try {
         isInIframe = window.self !== window.top;
@@ -286,12 +286,14 @@ function scrollChatBottom() {
         isInIframe = true;
     }
 
-    // Detectar se o dispositivo é móvel
-    let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-    // Só executar a rolagem se a página não estiver em um iframe e o dispositivo não for móvel
-    if (!isInIframe && !isMobile) {
-        objDiv.scrollTop = objDiv.scrollHeight;
+    let isMobile = window.innerWidth < 700;
+    if (!isInIframe) {
+        if (objDiv && !isMobile) {
+            objDiv.scrollTop = objDiv.scrollHeight;
+        } else if (isMobile) {
+            window.scrollTo(0, document.body.scrollHeight);
+        }
     }
 }
 
@@ -360,9 +362,24 @@ function enableChat() {
 
 }
 
-//Main function of GPT-3 chat API
-async function getResponse(prompt) {
+function isImageAttached() {
+    const inputFile = document.getElementById('image-upload');
+    return inputFile && inputFile.files && inputFile.files[0];
+}
 
+function convertImageToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            resolve(event.target.result);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+}
+
+//Main function of GPT- chat API
+async function getResponse(prompt) {
 
     //Tone
     if ($("#selectTone").val() != "") {
@@ -380,10 +397,18 @@ async function getResponse(prompt) {
     }
 
 
-
     const params = new URLSearchParams();
     params.append('prompt', prompt);
     params.append('ai_id', AI.id);
+    if (isImageAttached()) {
+        const imageFile = document.getElementById('image-upload').files[0];
+        try {
+            const imageBase64 = await convertImageToBase64(imageFile);
+            params.append('image', imageBase64);
+        } catch (error) {
+            console.error('Error converting image to base64:', error);
+        }
+    }
 
     try {
         const randomID = generateUniqueID();
@@ -432,16 +457,99 @@ async function getResponse(prompt) {
         toastr.error(`Error creating SSE: ${e}`);
     }
 }
+function setSpinnerVisionOpacity(opacity) {
+    var element = document.querySelector('.spinner-vision');
+    if (element) {
+        element.style.opacity = opacity;
+    }
+}
+
+function reinitVisionUpload(){
+    document.getElementById('image-upload').value = '';
+    $(".cursor").remove();
+    setSpinnerVisionOpacity(0);
+    var imagePreview = document.querySelector('.image-preview');
+    if (imagePreview) {
+        imagePreview.remove();
+    }
+}
+
 
 function streamChat(source, randomID) {
     $(`.chat_${randomID} .chat-audio`).hide();
     let fullPrompt = "";
     let partPrompt = "";
+    if(isImageAttached()){
+        setSpinnerVisionOpacity(1);
+        var removeIcon = document.querySelector('.remove-icon');
+        if (removeIcon) {
+            removeIcon.parentNode.removeChild(removeIcon);
+        }
+    }
     source.addEventListener('message', function(e) {
 
-        let data = e.data;
+        let data;
         let tokens = {};
+        try {
+            data = JSON.parse(e.data);
+        } catch (error) {
+            //console.error("Error", error);
+            //return;
+        }
 
+        //Vision
+        if (e.source && e.source.chunk && isImageAttached()) {
+
+            if (data && data.error === "[DEMO_MODE]") {
+                enableChat();
+                reinitVisionUpload();
+                toastr.error("You have reached the conversation limit for the demonstration model.")
+                enableChat();
+                $('.conversation-thread.thread-ai:last').remove();
+                return;
+            }else if (data && data.error === "[CHAT_LIMIT]") {
+                const modalElement = document.getElementById('modalDemo');
+                const modalInstance = new bootstrap.Modal(modalElement);
+                $('.conversation-thread.thread-ai:last').remove()
+                enableChat();
+                modalInstance.show();
+                reinitVisionUpload();
+                return;
+            }
+
+            let jsonVision;
+            try {
+                jsonVision = JSON.parse(e.source.chunk);
+                if(jsonVision.error){
+                    toastr.error(jsonVision.message);
+                    enableChat();
+                    reinitVisionUpload();
+                    return
+                }
+            } catch (error) {
+
+            }
+
+            if (jsonVision.isVisionResponse && jsonVision.choices && jsonVision.choices.length > 0 && jsonVision.choices[0].message && !jsonVision.error) {
+                const messageContent = jsonVision.choices[0].message.content;
+                console.log(messageContent);
+                $(`.${randomID} .get-stream`).append(`<img class="thumbnail-vision-img" src="/public_uploads/vision/${jsonVision.visionImgPatch}">`);
+                $(`.${randomID} .get-stream`).append(formatSpecialCharactersRealTime(messageContent));
+                enableChat();
+                updateCredits();
+                scrollChatBottom();
+                updateSessionChat(AI.slug);
+                document.getElementById('image-upload').value = '';
+                $(".cursor").remove();
+                setSpinnerVisionOpacity(0);
+                var imagePreview = document.querySelector('.image-preview');
+                if (imagePreview) {
+                    imagePreview.remove();
+                }
+            }
+        }else{
+
+        data = e.data;
         if (typeof data === 'string') {
             if (data.startsWith('[ERROR]')) {
                 let message = data.substr('[ERROR]'.length).trim();
@@ -471,6 +579,7 @@ function streamChat(source, randomID) {
             }
             //Chat limit
             const json = JSON.parse(e.data);
+
             if (json.error === "[CHAT_LIMIT]") {
                 const modalElement = document.getElementById('modalDemo');
                 const modalInstance = new bootstrap.Modal(modalElement);
@@ -521,8 +630,64 @@ function streamChat(source, randomID) {
             scrollChatBottom();
         }
 
+        }
+
     });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    var imageUploadElement = document.getElementById('image-upload');
+
+    if (imageUploadElement) {
+        imageUploadElement.addEventListener('change', function(event) {
+
+            const file = event.target.files[0];
+            if (file) {
+                if (file.type === "image/jpeg" || file.type === "image/jpg") {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const container = document.querySelector('.image-upload-wrapper');
+                        if (container) {
+                            const existingPreview = container.querySelector('.image-preview-container');
+
+                            if (existingPreview) {
+                                container.removeChild(existingPreview);
+                            }
+
+                            const previewContainer = document.createElement('div');
+                            previewContainer.classList.add('image-preview-container');
+
+                            const imgElement = document.createElement('img');
+                            imgElement.src = e.target.result;
+                            imgElement.classList.add('image-preview');
+
+                            const removeIcon = document.createElement('i');
+                            removeIcon.classList.add('bi', 'bi-x-circle-fill', 'remove-icon');
+                            removeIcon.addEventListener('click', function() {
+                                if (container.contains(previewContainer)) {
+                                    container.removeChild(previewContainer);
+                                }
+                                if (imageUploadElement) {
+                                    imageUploadElement.value = '';
+                                }
+                            });
+
+                            previewContainer.appendChild(imgElement);
+                            previewContainer.appendChild(removeIcon);
+                            container.appendChild(previewContainer);
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    toastr.error("Please upload images in JPG format.");
+                }
+            }
+        });
+    }
+});
+
+
+
 
 function updateSessionChat(slug) {
     fetch("../modules/customer/chat-session.php", {
@@ -581,18 +746,18 @@ if (canvas && microphoneButton) {
         if (isMobile()) {
             return;
         }
-        
+
         if (!ctx || !canvas) {
             return;
         }
-        
+
         try {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             const barWidth = (canvas.width / array.length) * 2.5;
             let x = 0;
             const scale = 0.5;
-            
+
             for (let i = 0; i < array.length; i++) {
                 const barHeight = array[i] * scale;
                 ctx.fillStyle = 'rgba(0, 114, 198, 0.3)';
@@ -611,7 +776,7 @@ if (canvas && microphoneButton) {
         if (!ctx || !canvas) {
             return;
         }
-        
+
         try {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         } catch (error) {
@@ -1224,6 +1389,8 @@ if (aiChatTop) {
     });
 }
 
+
+
 //Share chat
 function shareChat(url) {
     if (url == "not logged") {
@@ -1260,7 +1427,7 @@ function checkShareButtonDisplay() {
     }
 }
 
-//Check Cookies 
+//Check Cookies
 $(document).ready(function() {
     let cookieStatus = localStorage.getItem('cookies');
     if (cookieStatus === 'denied' || cookieStatus === null) {

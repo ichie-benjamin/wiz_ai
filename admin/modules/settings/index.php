@@ -60,9 +60,9 @@ $get = $settings->get(1);
       <div id="spiner-loading-settings">
           <div id="loading-spinner" class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
-          </div>        
+          </div>
       </div>
-        
+
     <div class="row" id="tab-content" style="display: none">
       <div class="col-lg-3">
         <nav class="custom-nav-settings">
@@ -74,6 +74,7 @@ $get = $settings->get(1);
             <button class="nav-link" id="nav-email-configs-tab" data-bs-toggle="tab" data-bs-target="#nav-email-configs" type="button" role="tab" aria-selected="false"><i class="bi bi-envelope"></i> E-mail configs</button>
             <button class="nav-link" id="nav-home-maintenance-mode" data-bs-toggle="tab" data-bs-target="#nav-maintenance-mode" type="button" role="tab" aria-selected="false"><i class="bi bi-tools"></i> Maintenance mode</button>
             <button class="nav-link" id="nav-google-analytics-tab" data-bs-toggle="tab" data-bs-target="#nav-google-analytics" type="button" role="tab" aria-selected="false"><i class="bi bi-bar-chart"></i> Google Analytics</button>
+            <button class="nav-link" id="nav-vision-tab" data-bs-toggle="tab" data-bs-target="#nav-vision" type="button" role="tab" aria-selected="false"><i class="bi bi-card-image"></i> Vision</button>
             <button class="nav-link" id="nav-dalle-tab" data-bs-toggle="tab" data-bs-target="#nav-dalle" type="button" role="tab" aria-selected="false"><i class="bi bi-card-image"></i> DALL-E</button>
             <button class="nav-link" id="nav-bank-info-tab" data-bs-toggle="tab" data-bs-target="#nav-bank-info" type="button" role="tab" aria-selected="false"><i class="bi bi-bank"></i> Bank deposit info</button>
             <button class="nav-link" id="nav-custom-code-js-tab" data-bs-toggle="tab" data-bs-target="#nav-custom-code-js" type="button" role="tab" aria-selected="false"><i class="bi bi-filetype-js"></i> Custom code JS</button>
@@ -84,13 +85,13 @@ $get = $settings->get(1);
             <button class="nav-link" id="nav-vip-tab" data-bs-toggle="tab" data-bs-target="#nav-vip" type="button" role="tab" aria-selected="false"><i class="bi bi-star-fill"></i> Vip</button>
             <button class="nav-link" id="nav-customer-tab" data-bs-toggle="tab" data-bs-target="#nav-customer" type="button" role="tab" aria-selected="false"><i class="bi bi-people"></i> Customer</button>
           </div>
-        </nav>        
+        </nav>
       </div>
 
       <div class="col-lg-9">
         <div class="tab-content">
           <div class="tab-pane fade show active" id="nav-api-key" role="tabpanel" aria-labelledby="nav-api-key-tab" tabindex="0">
-       
+
             <fieldset class="border rounded-2 p-3 mb-4">
               <legend><h5><i class="bi bi-gear"></i> Open AI</h5></legend>
               <div class="row align-middle">
@@ -104,12 +105,12 @@ $get = $settings->get(1);
                       <label for="floatingOpenAIApiKey">OpenAi Api Key</label>
                       <i class="bi bi-eye-slash toggle-password"></i>
                     </div>
-                  </div>                
+                  </div>
                 <?php } ?>
 
                 <a href="https://platform.openai.com/account/api-keys" target="_blank">https://platform.openai.com/account/api-keys</a>
               </div>
-            </fieldset> 
+            </fieldset>
 
             <fieldset class="border rounded-2 p-3 mb-4">
               <legend><h5><i class="bi bi-gear"></i> Google Cloud Translation API</h5></legend>
@@ -124,7 +125,7 @@ $get = $settings->get(1);
                       <label for="floatingGoogleTranslateKey">Cloud Translation API Key</label>
                       <i class="bi bi-eye-slash toggle-password"></i>
                     </div>
-                  </div>                
+                  </div>
                 <?php } ?>
               </div>
             </fieldset>
@@ -141,7 +142,7 @@ $get = $settings->get(1);
                       <label for="floatingGoogleTranslateKey">Google Text to Speech API Key</label>
                       <i class="bi bi-eye-slash toggle-password"></i>
                     </div>
-                  </div>                
+                  </div>
                 <?php } ?>
               </div>
             </fieldset>
@@ -152,13 +153,13 @@ $get = $settings->get(1);
 
                 <?php if($config->demo_mode){?>
                   <div class='col-md-12'><div class="alert alert-info"><i class="bi bi-exclamation-octagon fs-4"></i> For security reasons, the key is not shown in demo mode.</div></div>
-                <?php }else{ ?>                
+                <?php }else{ ?>
                   <div class="col-md-12">
                     <div class="form-check form-switch mb-3 custom-switch">
                       <input class="form-check-input" type="checkbox" id="floatingDisplayStripeActive" <?php if ($get->stripe_payment_active == 1) { echo 'checked'; } ?> onchange="updateSwitchValue('floatingDisplayStripeActive', 'hiddenDisplayStripeActive')">
                       <input type="hidden" name="stripe_payment_active" id="hiddenDisplayStripeActive" value="<?php echo $get->stripe_payment_active; ?>">
                       <label class="form-check-label" for="floatingDisplayStripeActive">Use Stripe payment method</label>
-                    </div>        
+                    </div>
                   </div>
 
                   <div class="col-md-12">
@@ -166,7 +167,7 @@ $get = $settings->get(1);
                       <input class="form-check-input" type="checkbox" id="floatingDisplayStripeTestMode" <?php if ($get->stripe_test_mode == 1) { echo 'checked'; } ?> onchange="updateSwitchValue('floatingDisplayStripeTestMode', 'hiddenDisplayStripeTestMode')">
                       <input type="hidden" name="stripe_test_mode" id="hiddenDisplayStripeTestMode" value="<?php echo $get->stripe_test_mode; ?>">
                       <label class="form-check-label" for="floatingDisplayStripeTestMode">Enable stripe test mode (Sandbox)</label>
-                    </div>        
+                    </div>
                   </div>
 
                   <div class="col-md-12">
@@ -214,13 +215,13 @@ $get = $settings->get(1);
 
                 <?php if($config->demo_mode){?>
                   <div class='col-md-12'><div class="alert alert-info"><i class="bi bi-exclamation-octagon fs-4"></i> For security reasons, the key is not shown in demo mode.</div></div>
-                <?php }else{ ?>                
+                <?php }else{ ?>
                   <div class="col-md-12">
                     <div class="form-check form-switch mb-3 custom-switch">
                       <input class="form-check-input" type="checkbox" id="floatingDisplayPayPalActive" <?php if ($get->paypal_payment_active == 1) { echo 'checked'; } ?> onchange="updateSwitchValue('floatingDisplayPayPalActive', 'hiddenDisplayPayPalActive')">
                       <input type="hidden" name="paypal_payment_active" id="hiddenDisplayPayPalActive" value="<?php echo $get->paypal_payment_active; ?>">
                       <label class="form-check-label" for="floatingDisplayPayPalActive">Use PayPal payment method</label>
-                    </div>        
+                    </div>
                   </div>
 
                   <div class="col-md-12">
@@ -247,7 +248,7 @@ $get = $settings->get(1);
                         <input class="form-check-input" type="checkbox" id="floatingDisplayPayPalTestMode" <?php if ($get->paypal_test_mode == 1) { echo 'checked'; } ?> onchange="updateSwitchValue('floatingDisplayPayPalTestMode', 'hiddenDisplayPayPalTestMode')">
                         <input type="hidden" name="paypal_test_mode" id="hiddenDisplayPayPalTestMode" value="<?php echo $get->paypal_test_mode; ?>">
                         <label class="form-check-label" for="floatingDisplayPayPalTestMode">Enable PayPal test mode (Sandbox)</label>
-                      </div>        
+                      </div>
                     </div>
 
                     <div class="col-md-12">
@@ -267,7 +268,7 @@ $get = $settings->get(1);
                     </div>
 
                   </div>
-                                
+
                 <?php } ?>
 
                 <a href="https://developer.paypal.com/dashboard/" target="_blank">https://developer.paypal.com/dashboard/</a>
@@ -285,12 +286,12 @@ $get = $settings->get(1);
                     <input class="form-check-input" type="checkbox" id="floatingDisplayUseRecaptcha" <?php if ($get->use_recaptcha == 1) { echo 'checked'; } ?> onchange="updateSwitchValue('floatingDisplayUseRecaptcha', 'hiddenDisplayUseRecaptcha')">
                     <input type="hidden" name="use_recaptcha" id="hiddenDisplayUseRecaptcha" value="<?php echo $get->use_recaptcha; ?>">
                     <label class="form-check-label" for="floatingDisplayUseRecaptcha">Use recaptcha</label>
-                  </div>        
+                  </div>
                 </div>
 
                 <?php if($config->demo_mode){?>
                   <div class='col-md-12'><div class="alert alert-info"><i class="bi bi-exclamation-octagon fs-4"></i> For security reasons, the key is not shown in demo mode.</div></div>
-                <?php }else{ ?> 
+                <?php }else{ ?>
                   <div class="col-md-12">
                     <div class="form-floating mb-3 position-relative" data-toggle-password>
                       <input name="recaptcha_public_key" type="password" class="form-control" id="floatingRecaptchaPublicKey" placeholder="Recaptcha Public Key" value="<?php echo $get->recaptcha_public_key; ?>">
@@ -310,7 +311,7 @@ $get = $settings->get(1);
 
                 <a href="https://www.google.com/recaptcha/admin/" target="_blank">https://www.google.com/recaptcha/admin/</a>
               </div>
-            </fieldset>                       
+            </fieldset>
 
           </div><!--nav-api-key-->
 
@@ -333,7 +334,7 @@ $get = $settings->get(1);
                     <input name="max_tokens_gpt" type="number" class="form-control" id="floatingMaxTokensGPT" placeholder="Max tokens GPT Model" value="<?php echo $get->max_tokens_gpt; ?>">
                     <label for="floatingMaxTokensGPT">Max tokens GPT Model</label>
                   </div>
-                </div> 
+                </div>
 
                 <div class="col-md-4">
                   <div class="form-floating mb-3">
@@ -348,7 +349,7 @@ $get = $settings->get(1);
                   <input type="hidden" name="chat_full_width" id="hiddenChatFullWidth" value="<?php echo $get->chat_full_width; ?>">
                   <label class="form-check-label" for="floatingChatFullWidth">Chat full width</label>
                 </div>
-              </div>          
+              </div>
 
               </div>
 
@@ -371,7 +372,7 @@ $get = $settings->get(1);
                     <input name="free_number_chats" type="number" class="form-control" id="floatingFreeNumberChats" placeholder="Number of free chats before login." value="<?php echo $get->free_number_chats; ?>">
                     <label for="floatingFreeNumberChats">Number of free chats before login</label>
                   </div>
-                </div>                                  
+                </div>
 
               </div>
             </fieldset>
@@ -385,7 +386,7 @@ $get = $settings->get(1);
                     <input name="meta_charset" type="text" class="form-control" id="floatingWebsiteMetaCharSet" placeholder="Meta Charset" value="<?php echo $get->meta_charset; ?>">
                     <label for="floatingWebsiteMetaCharSet">Meta Charset</label>
                   </div>
-                </div>                               
+                </div>
 
               </div>
             </fieldset>
@@ -401,10 +402,10 @@ $get = $settings->get(1);
                   <label class="form-check-label" for="floatingFreemode">Free mode</label>
                 </div>
                 <p>Activate this mode to make the website free, allowing users to converse with the intelligences without the need to purchase credits. However, logging in is still required for storing the chat history.</p>
-              </div>                              
+              </div>
 
               </div>
-            </fieldset>                        
+            </fieldset>
 
           </div><!--nav-chat-options-->
 
@@ -428,7 +429,7 @@ $get = $settings->get(1);
                       <div class="form-check form-switch mb-3 custom-switch">
                         <input class="form-check-input" type="checkbox" id="floatingForceDarkMode" <?php if ($get->force_dark_mode == 1) { echo 'checked'; } ?> onchange="updateSwitchValue('floatingForceDarkMode', 'hiddenForceDarkMode')">
                         <input type="hidden" name="force_dark_mode" id="hiddenForceDarkMode" value="<?php echo $get->force_dark_mode; ?>">
-                        <label class="form-check-label" for="floatingForceDarkMode">Force use of dark mode</label> 
+                        <label class="form-check-label" for="floatingForceDarkMode">Force use of dark mode</label>
                         <i tabindex="-1" data-bs-toggle="tooltip" title="By using this option, the color selection icon in the header will be hidden, and the template will be set to always use the dark color." class="bi-question-circle fs-5 text-success"></i>
                     </div>
 
@@ -471,12 +472,12 @@ $get = $settings->get(1);
                       <div class="form-check form-switch mb-3 custom-switch">
                         <input class="form-check-input" type="checkbox" id="floatingHeaderSignIn" <?php if ($get->display_header_sign_in == 1) { echo 'checked'; } ?> onchange="updateSwitchValue('floatingHeaderSignIn', 'hiddenHeaderSignIn')">
                         <input type="hidden" name="display_header_sign_in" id="hiddenHeaderSignIn" value="<?php echo $get->display_header_sign_in; ?>">
-                        <label class="form-check-label" for="floatingHeaderSignIn">Show header on sign in page</label> 
+                        <label class="form-check-label" for="floatingHeaderSignIn">Show header on sign in page</label>
                     </div>
 
                   </div>
 
-                </fieldset>     
+                </fieldset>
 
           </div><!--nav-header-options-->
 
@@ -500,7 +501,7 @@ $get = $settings->get(1);
                     <input name="display_home_ai_number" type="text" class="form-control" id="floatingDisplayHomeAINumber" placeholder="AI number that will show on home" value="<?php echo isset($get->display_home_ai_number) ? $get->display_home_ai_number : ''; ?>">
                     <label for="floatingDisplayHomeAINumber">AI number that will show on home</label>
                   </div>
-                </div>        
+                </div>
 
               </div>
 
@@ -524,7 +525,7 @@ $get = $settings->get(1);
                     <input name="display_categories_home_number" type="text" class="form-control" placeholder="Number of categories displayed in the home" value="<?php echo isset($get->display_categories_home_number) ? $get->display_categories_home_number : ''; ?>">
                     <label>Number of categories displayed in the home</label>
                   </div>
-                </div>                         
+                </div>
 
               </div>
             </fieldset>
@@ -532,14 +533,14 @@ $get = $settings->get(1);
             <fieldset>
               <fieldset class="border rounded-2 p-3 mb-4">
               <legend><h5><i class="bi bi-palette fs-4"></i> Theme colors</h5></legend>
-              
+
                 <div class="col-md-12">
                   <div class="form-check form-switch mb-3 custom-switch">
                     <input class="form-check-input" type="checkbox" id="floatingDisplayUseCustomColorTheme" <?php if ($get->use_custom_color_theme == 1) { echo 'checked'; } ?> onchange="updateSwitchValue('floatingDisplayUseCustomColorTheme', 'hiddenDisplayCustomColorTheme')">
                     <input type="hidden" name="use_custom_color_theme" id="hiddenDisplayCustomColorTheme" value="<?php echo $get->use_custom_color_theme; ?>">
                     <label class="form-check-label" for="floatingDisplayUseCustomColorTheme">Use Theme colors</label>
-                  </div>        
-                </div> 
+                  </div>
+                </div>
 
                 <p>Enable/Disable css from <a href="<?php echo $base_url; ?>/admin/theme">theme</a> menu</p>
 
@@ -557,16 +558,16 @@ $get = $settings->get(1);
                     <label class="form-check-label" for="floatingDisplayCookieMessage">Show Cookie Message</label>
                   </div>
                   <p>Use the <a href="<?php echo $base_url."/admin/languages"; ?>">translate</a> module if you want to customize the message. <br> The popup will not appear after you accept the terms.</p>
-                </div>    
+                </div>
 
               </div>
             </fieldset>
 
-            
+
           </div><!--nav-home-page-options-->
 
           <div class="tab-pane fade" id="nav-email-configs" role="tabpanel" aria-labelledby="nav-email-configs-tab" tabindex="0">
-          
+
           <fieldset class="border rounded-2 p-3 mb-4">
                 <legend><h5><i class="bi bi-envelope"></i> SMTP Configs</h5></legend>
                 <div class="row align-middle">
@@ -576,10 +577,10 @@ $get = $settings->get(1);
                       <select name="smtp_auth" class="form-control" id="floatingSMTPAuth" required>
                         <option value="1" <?php if (isset($get->smtp_auth) && $get->smtp_auth == '1') echo 'selected'; ?>>Yes</option>
                         <option value="0" <?php if (isset($get->smtp_auth) && $get->smtp_auth == '0') echo 'selected'; ?>>No</option>
-                      </select>                 
+                      </select>
                       <label for="floatingSMTPAuth">SMTP Authentication</label>
-                    </div>                 
-                  </div>                   
+                    </div>
+                  </div>
 
                   <div class="col-md-4">
                     <div class="form-floating mb-3">
@@ -612,7 +613,7 @@ $get = $settings->get(1);
                   <div class="col-md-4">
                     <?php if($config->demo_mode){?>
                       <div class='col-md-12'><div class="alert alert-info"><i class="bi bi-exclamation-octagon fs-4"></i> For security reasons, the password is not shown in demo mode.</div></div>
-                    <?php }else{ ?> 
+                    <?php }else{ ?>
                       <div class="form-floating mb-3">
                         <input name="smtp_password" type="password" class="form-control" id="floatingSMTPPassword" placeholder="SMTP Password" value="<?php echo isset($get->smtp_password) ? $get->smtp_password : ''; ?>">
                         <label for="floatingSMTPPassword">SMTP Password</label>
@@ -663,7 +664,7 @@ $get = $settings->get(1);
                       </select>
                       <label for="floatingSMTPAllowSelfSigned">SMTP Allow Self-Signed</label>
                     </div>
-                  </div>   
+                  </div>
 
                   <div class="col-md-4">
                     <div class="form-floating mb-3">
@@ -674,7 +675,7 @@ $get = $settings->get(1);
                       </select>
                       <label for="floatingSMTPSecure">SMTPSecure</label>
                     </div>
-                  </div>                
+                  </div>
 
                   <div class="col-12">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTestSMTP">Test sending email</button>
@@ -717,12 +718,12 @@ $get = $settings->get(1);
 
               <div class="form-group">
                 <textarea class="editor" name="maintenance_mode_text"><?php echo isset($get->maintenance_mode_text) ? $get->maintenance_mode_text : ''; ?></textarea>
-              </div>        
+              </div>
 
               </div>
 
-            </fieldset>  
-            
+            </fieldset>
+
             <fieldset class="border rounded-2 p-3 mb-4">
               <legend><h5><i class="bi bi-chat"></i> Show/hide php errors and notices (just for debug purposes)</h5></legend>
 
@@ -739,7 +740,7 @@ $get = $settings->get(1);
               </div>
 
             </fieldset>
-            
+
           </div><!--nav-maintenance-mode-tab-->
 
           <div class="tab-pane fade" id="nav-google-analytics" role="tabpanel" aria-labelledby="nav-google-analytics-tab" tabindex="0">
@@ -754,7 +755,7 @@ $get = $settings->get(1);
                     <input class="form-check-input" type="checkbox" id="floatingDisplayUseGoogleAnalytics" <?php if ($get->use_google_analytics == 1) { echo 'checked'; } ?> onchange="updateSwitchValue('floatingDisplayUseGoogleAnalytics', 'hiddenDisplayUseGoogleAnalytics')">
                     <input type="hidden" name="use_google_analytics" id="hiddenDisplayUseGoogleAnalytics" value="<?php echo $get->use_google_analytics; ?>">
                     <label class="form-check-label" for="floatingDisplayUseGoogleAnalytics">Use Google Analytics</label>
-                  </div>        
+                  </div>
                 </div>
 
 
@@ -766,7 +767,7 @@ $get = $settings->get(1);
 
               </div>
             </fieldset>
-            
+
           </div><!--nav-google-analytics-tab-->
 
           <div class="tab-pane fade" id="nav-dalle" role="tabpanel" aria-labelledby="nav-dalle-tab" tabindex="0">
@@ -786,7 +787,7 @@ $get = $settings->get(1);
                 </div>
 
 
-              </div>                                  
+              </div>
 
             </fieldset>
 
@@ -821,12 +822,12 @@ $get = $settings->get(1);
                         echo "<option value='$dalle_img_size' $selected>$dalle_img_size</option>";
                       }
                       ?>
-                    </select>                 
+                    </select>
                     <label for="floatingDallEImgSize">Dall-E 2 Image Size</label>
-                  </div>                 
+                  </div>
                 </div>
 
-              </div>                                  
+              </div>
 
             </fieldset>
 
@@ -855,15 +856,15 @@ $get = $settings->get(1);
                         echo "<option value='$dalle3_img_size' $selected>$dalle3_img_size</option>";
                       }
                       ?>
-                    </select>                 
+                    </select>
                     <label>Dall-E 3 Image Size</label>
-                  </div>                 
+                  </div>
                 </div>
 
-              </div>                                  
+              </div>
 
             </fieldset>
-            
+
           </div><!--nav-dalle-tab-->
 
           <div class="tab-pane fade" id="nav-bank-info" role="tabpanel" aria-labelledby="nav-bank-info-tab" tabindex="0">
@@ -878,7 +879,7 @@ $get = $settings->get(1);
                     <input class="form-check-input" type="checkbox" id="floatingDisplayBankDepositeActive" <?php if ($get->bank_deposit_active == 1) { echo 'checked'; } ?> onchange="updateSwitchValue('floatingDisplayBankDepositeActive', 'hiddenDisplayBankDepositActive')">
                     <input type="hidden" name="bank_deposit_active" id="hiddenDisplayBankDepositActive" value="<?php echo $get->bank_deposit_active; ?>">
                     <label class="form-check-label" for="floatingDisplayBankDepositeActive">Use bank deposit method</label>
-                  </div>        
+                  </div>
                 </div>
 
                 <div class="col-md-12">
@@ -905,7 +906,7 @@ $get = $settings->get(1);
                     <input class="form-check-input" type="checkbox" id="floatingDisplayUseJscode" <?php if ($get->use_custom_code == 1) { echo 'checked'; } ?> onchange="updateSwitchValue('floatingDisplayUseJscode', 'hiddenDisplayUseJscode')">
                     <input type="hidden" name="use_custom_code" id="hiddenDisplayUseJscode" value="<?php echo $get->use_custom_code; ?>">
                     <label class="form-check-label" for="floatingDisplayUseJscode">Use custom code</label>
-                  </div>        
+                  </div>
                 </div>
 
 
@@ -916,8 +917,8 @@ $get = $settings->get(1);
                 </div>
 
               </div>
-            </fieldset>   
-                                    
+            </fieldset>
+
               </div>
             </div>
 
@@ -940,12 +941,12 @@ $get = $settings->get(1);
                 </div>
 
               </div>
-            </fieldset>   
-                                    
+            </fieldset>
+
               </div>
             </div>
 
-          </div><!--nav-custom-code-js-tab--> 
+          </div><!--nav-custom-code-js-tab-->
 
           <div class="tab-pane fade" id="nav-blog-sidebar" role="tabpanel" aria-labelledby="nav-blog-sidebar-tab" tabindex="0">
 
@@ -964,10 +965,10 @@ $get = $settings->get(1);
                   <div class="col-12">
                     <div class="form-group">
                       <textarea class="editor" name="blog_sidebar"><?php echo htmlspecialchars($get->blog_sidebar, ENT_QUOTES, 'UTF-8'); ?></textarea>
-                    </div>   
+                    </div>
                   </div>
-                </fieldset>   
-                                    
+                </fieldset>
+
               </div>
             </div>
 
@@ -986,8 +987,8 @@ $get = $settings->get(1);
                     <input class="form-check-input" type="checkbox" id="floatingCheckAdminAgent" <?php if ($get->admin_check_user_agent == 1) { echo 'checked'; } ?> onchange="updateSwitchValue('floatingCheckAdminAgent', 'hiddenCheckAdminAgent')">
                     <input type="hidden" name="admin_check_user_agent" id="hiddenCheckAdminAgent" value="<?php echo $get->admin_check_user_agent; ?>">
                     <label class="form-check-label" for="floatingCheckAdminAgent">Check admin agent</label>
-                    <i tabindex="-1" data-bs-toggle="tooltip" title="Check Admin Agent: Verifies the browser used by the admin. Helps detect unexpected browser changes, enhancing security." class="bi-question-circle fs-5 text-success"></i>                    
-                  </div>                  
+                    <i tabindex="-1" data-bs-toggle="tooltip" title="Check Admin Agent: Verifies the browser used by the admin. Helps detect unexpected browser changes, enhancing security." class="bi-question-circle fs-5 text-success"></i>
+                  </div>
                 </div>
 
                 <div class="col-md-12">
@@ -995,7 +996,7 @@ $get = $settings->get(1);
                     <input class="form-check-input" type="checkbox" id="floatingCheckIp" <?php if ($get->admin_check_ip_address == 1) { echo 'checked'; } ?> onchange="updateSwitchValue('floatingCheckIp', 'hiddenCheckAdminIp')">
                     <input type="hidden" name="admin_check_ip_address" id="hiddenCheckAdminIp" value="<?php echo $get->admin_check_ip_address; ?>">
                     <label class="form-check-label" for="floatingCheckIp">Check admin IP</label>
-                    <i tabindex="-1" data-bs-toggle="tooltip" title="Check Admin IP: Checks the admin's IP address. Detects location changes, providing an additional layer of security." class="bi-question-circle fs-5 text-success"></i>                      
+                    <i tabindex="-1" data-bs-toggle="tooltip" title="Check Admin IP: Checks the admin's IP address. Detects location changes, providing an additional layer of security." class="bi-question-circle fs-5 text-success"></i>
                   </div>
                 </div>
 
@@ -1004,13 +1005,13 @@ $get = $settings->get(1);
                     <input class="form-check-input" type="checkbox" id="floatingCheckAdminToken" <?php if ($get->admin_check_token == 1) { echo 'checked'; } ?> onchange="updateSwitchValue('floatingCheckAdminToken', 'hiddenCheckAdminToken')">
                     <input type="hidden" name="admin_check_token" id="hiddenCheckAdminToken" value="<?php echo $get->admin_check_token; ?>">
                     <label class="form-check-label" for="floatingCheckAdminToken">Check admin Token</label>
-                    <i tabindex="-1" data-bs-toggle="tooltip" title="Check Admin Token: Checks a unique identifier assigned to the admin at login. Ensures the session is valid and enhances security against session hijacking attacks." class="bi-question-circle fs-5 text-success"></i>                     
+                    <i tabindex="-1" data-bs-toggle="tooltip" title="Check Admin Token: Checks a unique identifier assigned to the admin at login. Ensures the session is valid and enhances security against session hijacking attacks." class="bi-question-circle fs-5 text-success"></i>
                   </div>
-                </div>                                              
+                </div>
 
               </div>
 
-            </fieldset>            
+            </fieldset>
 
           </div><!--nav-admin-login-tab-->
 
@@ -1032,12 +1033,12 @@ $get = $settings->get(1);
                     <input name="js_version" type="number" class="form-control" id="floatingCacheJS" placeholder="Caching version for the CSS" value="<?php echo $get->js_version; ?>">
                     <label for="floatingCacheJS">Caching version for the JS</label>
                   </div>
-                </div>                                    
-                                          
+                </div>
+
 
               </div>
 
-            </fieldset>            
+            </fieldset>
 
           </div><!--nav-cache-->
 
@@ -1052,15 +1053,15 @@ $get = $settings->get(1);
                       <input class="form-check-input" type="checkbox" id="floatingDisplayVipHigherTier" <?php if ($get->vip_higher_tier == 1) { echo 'checked'; } ?> onchange="updateSwitchValue('floatingDisplayVipHigherTier', 'hiddenDisplayVipHigherTier')">
                       <input type="hidden" name="vip_higher_tier" id="hiddenDisplayVipHigherTier" value="<?php echo $get->vip_higher_tier; ?>">
                       <label class="form-check-label" for="floatingDisplayVipHigherTier">Use the higher purchase tier</label>
-                    </div>        
-                  </div>        
+                    </div>
+                  </div>
 
                 <div class="col-12">
                   <p>By checking the option above, you activate the "Higher Tier" function.<br>
                   When this function is enabled, the system will consider the highest tier level that the user has purchased to grant access to the bots.<br>
                   For example, suppose a bot requires tier 1 and tier 2 to be accessed, but the user purchased a package with tier 3 or higher. <br>
                   In this case, if the "Higher Tier" option is enabled, the user will automatically have access to tiers 1 and 2, even though they did not individually purchase those tiers. <br>
-                This happens because the system takes into account the highest tier level that the user possesses, granting them access to all lower tiers as well.</p>                  
+                This happens because the system takes into account the highest tier level that the user possesses, granting them access to all lower tiers as well.</p>
                 </div>
 
                 <div class="col-md-12">
@@ -1069,8 +1070,8 @@ $get = $settings->get(1);
                     <input class="form-check-input" type="checkbox" id="floatingDisplayPromptsPackageList" <?php if ($get->display_prompts_packagelist == 1) { echo 'checked'; } ?> onchange="updateSwitchValue('floatingDisplayPromptsPackageList', 'hiddenDisplayPromptsPackageList')">
                     <input type="hidden" name="display_prompts_packagelist" id="hiddenDisplayPromptsPackageList" value="<?php echo $get->display_prompts_packagelist; ?>">
                     <label class="form-check-label" for="floatingDisplayPromptsPackageList">Display prompts on the price screen</label>
-                  </div>        
-                </div> 
+                  </div>
+                </div>
 
                 <div class="col-md-12">
                   <hr>
@@ -1078,12 +1079,12 @@ $get = $settings->get(1);
                     <input class="form-check-input" type="checkbox" id="floatingDisplayFreePrompts" <?php if ($get->vip_display_free_prompts == 1) { echo 'checked'; } ?> onchange="updateSwitchValue('floatingDisplayFreePrompts', 'hiddenDisplayFreePrompts')">
                     <input type="hidden" name="vip_display_free_prompts" id="hiddenDisplayFreePrompts" value="<?php echo $get->vip_display_free_prompts; ?>">
                     <label class="form-check-label" for="floatingDisplayFreePrompts">Display free prompts in package</label>
-                  </div>        
-                </div>                
+                  </div>
+                </div>
 
               </div>
 
-            </fieldset>            
+            </fieldset>
 
           </div><!--nav-vip-tab-->
 
@@ -1099,7 +1100,7 @@ $get = $settings->get(1);
                     <input class="form-check-input" type="checkbox" id="floatingDisplayCustomerConfirmEmail" <?php if ($get->customer_confirm_email == 1) { echo 'checked'; } ?> onchange="updateSwitchValue('floatingDisplayCustomerConfirmEmail', 'hiddenDisplayCustomerConfirmEmail')">
                     <input type="hidden" name="customer_confirm_email" id="hiddenDisplayCustomerConfirmEmail" value="<?php echo $get->customer_confirm_email; ?>">
                     <label class="form-check-label" for="floatingDisplayCustomerConfirmEmail">Confirm email on registration</label>
-                  </div>        
+                  </div>
                 </div>
 
                 <div class="col-md-12">
@@ -1116,11 +1117,11 @@ $get = $settings->get(1);
                 </p>
                 <div class="form-group">
                   <textarea class="editor" name="customer_confirm_email_content"><?php echo isset($get->customer_confirm_email_content) ? $get->customer_confirm_email_content : ''; ?></textarea>
-                </div>                        
+                </div>
 
               </div>
 
-            </fieldset>            
+            </fieldset>
 
           </div><!--nav-customer-tab-->
 
@@ -1131,7 +1132,7 @@ $get = $settings->get(1);
       </div>
     </div>
 
-                              
+
 
 
     <div class="d-grid">
@@ -1151,7 +1152,7 @@ $get = $settings->get(1);
       </div>
       <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
-  </div>      
+  </div>
 
 <?php
 require_once(__DIR__."/../../inc/footer.php");

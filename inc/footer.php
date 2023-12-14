@@ -83,20 +83,9 @@
     </div>
   </div>
   <?php } ?>
-  <script src="https://cdn.WebRTC-Experiment.com/RecordRTC.js"></script>
 
 
-    <script>
-        $(document).ready(function(){
-            $('#formIam').change(function(){
-                if($(this).val() === 'parent' || $(this).val() === 'teacher'){
-                    $('#parentEmailField').hide();
-                } else {
-                    $('#parentEmailField').show();
-                }
-            });
-        });
-    </script>
+</script>
 
 </body>
 </html>

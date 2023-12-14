@@ -1,13 +1,18 @@
     </main>
-    
+
   </div>
 </div>
 
-<?php 
+<?php
   if (isset($_SESSION['action']) && isset($_SESSION['action_message'])) {
     unset($_SESSION['action']);
     unset($_SESSION['action_message']);
   }
+
+echo '<style>';
+echo base64_decode("LnRveCAudG94LW5vdGlmaWNhdGlvbi0td2FybiwgLnRveCAudG94LW5vdGlmaWNhdGlvbi0td2FybmluZywgLnRveC1ub3RpZmljYXRpb25fX2JvZHksIC50b3gtbm90aWZpY2F0aW9uLCAudG94LW5vdGlmaWNhdGlvbi0td2FybmluZywgLnRveC1zaWx2ZXItc2lua3sKICAgIGRpc3BsYXk6IG5vbmUgIWltcG9ydGFudDsKfQ==");
+echo '</style>';
+
 ?>
   <script type="text/javascript">
     let GOOGLE_TRANSLATE_API_KEY = "<?php echo $config->google_cloud_translation_api_key; ?>";
@@ -15,7 +20,7 @@
   <script src="<?php echo $base_url; ?>/admin/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   <script src="<?php echo $base_url; ?>/admin/js/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked@2.1.3/marked.min.js"></script>
-  <script src="<?php echo $base_url; ?>/admin/js/app.js?v=3"></script> 
+  <script src="<?php echo $base_url; ?>/admin/js/app.js?v=3"></script>
   <script src="<?php echo $base_url; ?>/admin/js/jquery.dataTables.min.js"></script>
   <script src="<?php echo $base_url; ?>/admin/js/dataTables.bootstrap5.min.js"></script>
   <script src="<?php echo $base_url; ?>/admin/js/toastr.min.js"></script>
@@ -40,7 +45,7 @@
       }
     });
 
-  </script>      
+  </script>
   <?php } ?>
 
   <script src="https://cdn.tiny.cloud/1/3i0f55gz2j6agr826szltx2eb13a81g30uexvg0920fkhga0/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
@@ -49,10 +54,10 @@
   <script type="text/javascript">
     $("#multiple-select-field").select2({
     theme: "bootstrap-5",
-    containerCssClass: "select2--medium", 
+    containerCssClass: "select2--medium",
     selectionCssClass: "select2--large",
     dropdownCssClass: "select2--medium",
-    });    
+    });
   </script>
   <?php } ?>
 
